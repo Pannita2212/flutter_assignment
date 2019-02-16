@@ -64,17 +64,22 @@ class LogInState extends State<LogIn> {
                     if (!_formKey.currentState.validate()) {
                       Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text("กรุณาระบุ user or password")));
-                    } else if ((chk[0] == true && chk[1] == false)) {
+                    } else if (chk[0] == true && chk[1] == false) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("user or password ไม่ถูกต้อง")));
+                    } else if (chk[1] == true && chk[0] == false) {
                       Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text("user or password ไม่ถูกต้อง"),
                       ));
-                    } else if ((chk[1] == true && chk[0] == false)) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("user or password ไม่ถูกต้อง"),
-                      ));
+                    } else if (chk[1] == true && chk[0] == true) {
+                      Navigator.pushNamed(context, "/home");
                     } else {
-                    Navigator.pushNamed(context, "/home");
-                  } chk[0] = false; chk[1] = false;
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("user or password ไม่ถูกต้อง"),
+                      ));
+                    }
+                    chk[0] = false;
+                    chk[1] = false;
                   },
                 ),
                 Align(
